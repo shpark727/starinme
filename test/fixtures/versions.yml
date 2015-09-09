@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  version_code: 1
+  version_name: MyString
+  platform: MyString
+  forced: false
+
+two:
+  version_code: 1
+  version_name: MyString
+  platform: MyString
+  forced: false

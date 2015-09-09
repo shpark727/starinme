@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  posting_id: 1
+  user_id: 1
+  outer_url: MyString
+  outer_platform: MyString
+
+two:
+  posting_id: 1
+  user_id: 1
+  outer_url: MyString
+  outer_platform: MyString

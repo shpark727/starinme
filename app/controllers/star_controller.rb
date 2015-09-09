@@ -1,0 +1,2 @@
+class StarController < ApplicationController
+end

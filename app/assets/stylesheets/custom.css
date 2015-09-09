@@ -1,0 +1,73 @@
+a {
+	color : white;
+}
+.root {
+	font-family : "Bebas Neue", "Nanum Barun Gothic", sans-serif;
+	font-size : 15px;
+}
+.row {
+	margin-left :0px;
+	margin-right : 0px;
+}
+
+.top_bg {
+	background-image:url('bg.png');
+	text-align :center;
+	color :white;
+	height : 600px;	
+}
+
+.vertical {
+	padding-top:100px;	
+}
+.main_container{
+	position :relative;
+	padding-top:50px;
+	padding-left:200px;
+	padding-right:200px;
+
+}
+.thumbnails{
+}
+.thumbnail{	
+	height : 200px; 
+	width : 100%;
+	border-radius :0px;
+	text-align :center;
+}
+.boxboundary {
+	text-align :center;
+	margin:0px;
+    
+}
+
+
+.page_footer{
+	background-color:black;
+	color :white;
+	height :130px;
+	font-family : "Bebas Neue", "Nanum Barun Gothic", sans-serif;
+	font-size : 15px;
+
+}
+.page_footer a {
+	color:white;
+}
+.page_footer a:hover{
+	color:white;
+}
+.page_footer .bottom_wrapper {
+	position :relative;
+	text-align :right;
+} 
+
+ul {
+	margin: 1em;
+	list-style :none;
+	list-style-image :none;
+	
+}
+li {
+display :inline-block;
+margin:2em;
+}

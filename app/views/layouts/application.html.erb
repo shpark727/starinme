@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Starinme</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
+<link rel="stylesheet" href="custom.css">
+<link rel="stylesheet" href="custom2.css">
+</head>
+<body>
+
+<%= yield %>
+
+<div class="page_footer">
+		<div class="bottom_wrapper">
+			<nav>
+				<ul>
+					<li><a href="/star/introduce.erb">소개</a></li>/
+					<li><a href="/star/team.erb">팀</a></li>/
+					<li><a href="/star/rule.erb">이용약관</a></li>/
+					<li><a href="/star/faq.erb">FAQ</a></li>/
+					<li><a href="/star/privacy.erb">개인정보보호</a></li>
+				</ul>
+			</nav>
+		</div>
+</div>
+
+</body>
+</html>
