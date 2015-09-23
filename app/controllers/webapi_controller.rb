@@ -63,7 +63,7 @@ class WebapiController < ApplicationController
 		u.save	
 		if u.save
 			@response = Hash.new
-			@response["success"] = success
+			@response["success"] = "success"
 			respond_to do |format|
 				format.json {render json: @response}
 				format.xml {rener xml: @response}
@@ -83,7 +83,7 @@ class WebapiController < ApplicationController
 	
 	def user
 		unless session[:uniquestring].nil?
-			@u = where(:id => session[:uniquestring]).take
+			@u = User.where(:id => session[:uniquestring]).take
 			respond_to do |format|
 				format.json { render json: @u }	
 				format.xml { render xml: @u }
@@ -101,7 +101,7 @@ class WebapiController < ApplicationController
 	end
 
 	def edituser
-		@u = User.find(params[:id])
+		@u = User.where(:id => session[:uniquestring]).take
 		@u.password = params[:password]
 		@u.user_type = params[:user_type]
 		@u.sns_url = params[:sns_url]
@@ -110,9 +110,12 @@ class WebapiController < ApplicationController
 		@u.gender = params[:gender]
 		@u.age = params[:age]
 		@u.save
-		respond_to do |format|
-			format.json { render json: @u}
-			format.xml { render xml: @u}
+		if @u.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
 		end
 	end
 
@@ -130,6 +133,13 @@ class WebapiController < ApplicationController
 		@p.end_date = params[:end_date]
 		@p.main_image = params[:main_image]
 		@p.save
+		if @p.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def modifyposting
@@ -146,11 +156,25 @@ class WebapiController < ApplicationController
 		@p.end_date = params[:end_date]
 		@p.main_image = params[:main_image]
 		@p.save	
+		if @p.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def deleteposting
 		@p = Posting.find(params[:id])
 		@p.destroy
+		if @p.destroy?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def shareposting
@@ -160,6 +184,13 @@ class WebapiController < ApplicationController
 		@s.outer_url = params[:outer_url]
 		@s.outer_platform = params[:outer_platform]
 		@s.save		
+		if @s.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def likeposting
@@ -167,34 +198,94 @@ class WebapiController < ApplicationController
 		@l.posting_id = params[:posting_id]
 		@l.user_id = params[:user_id]
 		@l.save
+		if @l.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 	
 	def deletelikeposting
 		@l = Like.find(params[:id])
 		@l.destroy
+		if @l.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def joinlist
-		@jl = Join.find(params[:id])
+		@joinlist = Join.find(params[:id])
 		respond_to do |format|
-			format.json { render json:@jl }
-			format.xml { render xml:@jl }
+			format.json { render json:@joinlist }
+			format.xml { render xml:@joinlist }
 		end
 	end
 
 	def joinproject
+		@joinproject = Join.new
+		@joinproject.project_id = params[:id]
+		@joinproject.user_id = session[:uniquestring] 
+		@joinproject.status = "프로젝트에 참여 신청되었습니다"
+		@joinproject.save	
+		if @joinproject.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def joincancel
+		@joincancel = Join.where(:project_id => params[:id], :user_id = session[:uniquestring]).take
+		@joincancel.destroy 
+		if @joincancel.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def joinaccept
+		@joinaccept = Join.where(:project_id => params[:id], :user_id = session[:uniquestring]).take
+		@joinaccept.status = "프로젝트 참여가 승인되었습니다"
+		@joinaccept.save 
+		if @joinaccept.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def joinrefuse
+		@joinrefuse = Join.where(:project_id => params[:id], :user_id = session[:uniquestring]).take
+		@joinrefuse.status = "프로젝트 참여가 거절되었습니다"
+		@joinrefuse.save 
+		if @p.save?
+			@response = Hash.new
+			@response["success"] = "success"
+				respond_to do |format|
+				format.json {render json: @response}
+				format.xml {rener xml: @response}
+		end
 	end
 
 	def categorylist
+		@categories = Category.all
+			respond_to do |format|
+			format.json { render json: @categories }
+			format.xml { render xml: @categories }
+			end	
 	end
 
 	def createcategory
@@ -202,10 +293,21 @@ class WebapiController < ApplicationController
 
 	def postimage
 	end
-
-	def descript
+	
+	def publics
+		@publics = Public.where(:topic => params[:type]).take
+			respond_to do |format|
+			format.json { render json: @publics }
+			format.xml { render xml: @publics }
+			end
 	end
 
 	def version
+		@versions = Version.all
+			respond_to do |format|
+			format.json { render json: @versions }
+			format.xml { render xml: @versions }
+		end
 	end
+
 end
